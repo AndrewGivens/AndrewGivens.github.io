@@ -226,24 +226,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>monsters <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"monster"</span>: [<span class="st">"Goblin"</span>, <span class="st">"Ogre"</span>, <span class="st">"Owlbear"</span>, <span class="st">"Kobold"</span>, <span class="st">"Troll"</span>],</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"cr"</span>: [<span class="fl">0.25</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">0.125</span>, <span class="dv">5</span>],</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> monsters.groupby(<span class="st">"cr"</span>)[<span class="st">"monster"</span>].count().sort_index()</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.bar(counts.index.astype(<span class="bu">str</span>), counts.values, color<span class="op">=</span><span class="st">"steelblue"</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Monsters by Challenge Rating"</span>, xlabel<span class="op">=</span><span class="st">"Challenge rating"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Number of monsters"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"cr_by_rating.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"monster"</span>: [</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Goblin"</span>, <span class="st">"Skeleton"</span>, <span class="st">"Zombie"</span>, <span class="st">"Orc"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Hobgoblin"</span>, <span class="st">"Ogre"</span>, <span class="st">"Owlbear"</span>, <span class="st">"Troll"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"cr"</span>: [<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> monsters.groupby(<span class="st">"cr"</span>)[<span class="st">"monster"</span>].count().sort_index()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.bar(counts.index.astype(<span class="bu">str</span>), counts.values, color<span class="op">=</span><span class="st">"steelblue"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Monsters by Challenge Rating"</span>, xlabel<span class="op">=</span><span class="st">"Challenge rating"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Number of monsters"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"cr_by_rating.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Install the two libraries if needed, then run the script:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install pandas matplotlib</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_cr.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The script creates <code>cr_by_rating.png</code>. Before committing, open the image and make sure the labels and counts look sensible. If you adapt this for a CSV, keep the data file in the project or give readers a clear source and download step; otherwise they cannot reproduce the plot. This tiny in-script example keeps the tutorial runnable on its own.</p>
+<p>The script creates <code>cr_by_rating.png</code>. In this small example, three monsters have CR 0.25 and two have CR 0.5, so those bars are taller than the others. Before committing, open the image and make sure the labels and counts look sensible. If you adapt this for a CSV, keep the data file in the project or give readers a clear source and download step; otherwise they cannot reproduce the plot. This tiny in-script example keeps the tutorial runnable on its own.</p>
 </section>
 <section id="commit-and-push-the-branch" class="level2">
 <h2 class="anchored" data-anchor-id="commit-and-push-the-branch">Commit and push the branch</h2>
