@@ -36,8 +36,11 @@ import matplotlib.pyplot as plt
 
 monsters = pd.DataFrame(
     {
-        "monster": ["Goblin", "Ogre", "Owlbear", "Kobold", "Troll"],
-        "cr": [0.25, 2, 3, 0.125, 5],
+        "monster": [
+            "Goblin", "Skeleton", "Zombie", "Orc",
+            "Hobgoblin", "Ogre", "Owlbear", "Troll",
+        ],
+        "cr": [0.25, 0.25, 0.25, 0.5, 0.5, 2, 3, 5],
     }
 )
 
@@ -59,7 +62,7 @@ python -m pip install pandas matplotlib
 python plot_cr.py
 ```
 
-The script creates `cr_by_rating.png`. Before committing, open the image and make sure the labels and counts look sensible. If you adapt this for a CSV, keep the data file in the project or give readers a clear source and download step; otherwise they cannot reproduce the plot. This tiny in-script example keeps the tutorial runnable on its own.
+The script creates `cr_by_rating.png`. In this small example, three monsters have CR 0.25 and two have CR 0.5, so those bars are taller than the others. Before committing, open the image and make sure the labels and counts look sensible. If you adapt this for a CSV, keep the data file in the project or give readers a clear source and download step; otherwise they cannot reproduce the plot. This tiny in-script example keeps the tutorial runnable on its own.
 
 ## Commit and push the branch
 
