@@ -1,5 +1,54 @@
 [
   {
+    "objectID": "tutorial.html",
+    "href": "tutorial.html",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "",
+    "text": "Pull requests are often associated with team projects, but they can help when you work by yourself, too. A pull request gives you a review step before a change becomes part of your main branch. You can inspect exactly what changed, check the result, and keep a record of why you made the change. It is a little like setting your work aside, then returning to it with fresh eyes.\nIn this tutorial, we will make a small plot for a Dungeons & Dragons monster challenge-rating project. We will do the work on a branch, push that branch to GitHub, review it in a pull request, and merge it into main. The example data below is deliberately small and included in the script, so anyone can run the example without finding or downloading the same dataset. In a real analysis, you could replace the example rows with data from your own CSV."
+  },
+  {
+    "objectID": "tutorial.html#why-use-a-pull-request-when-working-alone",
+    "href": "tutorial.html#why-use-a-pull-request-when-working-alone",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "",
+    "text": "Pull requests are often associated with team projects, but they can help when you work by yourself, too. A pull request gives you a review step before a change becomes part of your main branch. You can inspect exactly what changed, check the result, and keep a record of why you made the change. It is a little like setting your work aside, then returning to it with fresh eyes.\nIn this tutorial, we will make a small plot for a Dungeons & Dragons monster challenge-rating project. We will do the work on a branch, push that branch to GitHub, review it in a pull request, and merge it into main. The example data below is deliberately small and included in the script, so anyone can run the example without finding or downloading the same dataset. In a real analysis, you could replace the example rows with data from your own CSV."
+  },
+  {
+    "objectID": "tutorial.html#start-with-a-separate-branch",
+    "href": "tutorial.html#start-with-a-separate-branch",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "Start with a separate branch",
+    "text": "Start with a separate branch\nFirst, clone the project if you do not already have a local copy, then move into its folder. If you already have the project, start with the update and branch commands instead:\ngit clone https://github.com/AndrewGivens/dnd-challenge-rating-analysis.git\ncd dnd-challenge-rating-analysis\ngit switch main\ngit pull origin main\ngit switch -c add-cr-plot\nThe first two commands download the repository and enter its directory. git switch main selects the main branch, and git pull brings it up to date with GitHub. The last command creates and switches to a new branch named add-cr-plot. A branch gives this one change its own workspace; the main branch stays as it was while we work.\nChoose a name that describes the change. Names such as add-cr-plot or fix-missing-values make it easier to recognize what a branch is for later. GitHub’s guide to branches explains how branches fit into a typical workflow."
+  },
+  {
+    "objectID": "tutorial.html#make-a-small-checkable-change",
+    "href": "tutorial.html#make-a-small-checkable-change",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "Make a small, checkable change",
+    "text": "Make a small, checkable change\nCreate a file named plot_cr.py in the project folder. This example counts how many monsters appear at each challenge rating and saves a bar chart:\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nmonsters = pd.DataFrame(\n    {\n        \"monster\": [\"Goblin\", \"Ogre\", \"Owlbear\", \"Kobold\", \"Troll\"],\n        \"cr\": [0.25, 2, 3, 0.125, 5],\n    }\n)\n\ncounts = monsters.groupby(\"cr\")[\"monster\"].count().sort_index()\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.bar(counts.index.astype(str), counts.values, color=\"steelblue\")\nax.set(title=\"Monsters by Challenge Rating\", xlabel=\"Challenge rating\",\n       ylabel=\"Number of monsters\")\nfig.tight_layout()\nfig.savefig(\"cr_by_rating.png\", dpi=150)\nplt.show()\nInstall the two libraries if needed, then run the script:\npython -m pip install pandas matplotlib\npython plot_cr.py\nThe script creates cr_by_rating.png. Before committing, open the image and make sure the labels and counts look sensible. If you adapt this for a CSV, keep the data file in the project or give readers a clear source and download step; otherwise they cannot reproduce the plot. This tiny in-script example keeps the tutorial runnable on its own."
+  },
+  {
+    "objectID": "tutorial.html#commit-and-push-the-branch",
+    "href": "tutorial.html#commit-and-push-the-branch",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "Commit and push the branch",
+    "text": "Commit and push the branch\nCheck what Git sees, then save the script and plot in a commit:\ngit status\ngit add plot_cr.py cr_by_rating.png\ngit commit -m \"Add challenge rating plot\"\ngit push -u origin add-cr-plot\ngit status helps confirm that the files you intend to include are present. git add stages those files for the next commit, and git commit records a snapshot locally with a short description. git push sends the branch to GitHub so you can open a pull request. The -u option connects your local branch to its GitHub copy, so later pushes can use the shorter git push command."
+  },
+  {
+    "objectID": "tutorial.html#review-the-pull-request",
+    "href": "tutorial.html#review-the-pull-request",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "Review the pull request",
+    "text": "Review the pull request\nOn GitHub, open the repository and choose Compare & pull request for add-cr-plot. Set the base branch to main and the compare branch to add-cr-plot. Give the pull request a title and a short note explaining the plot. A pull request proposes merging one branch into another; it does not merge the change until you choose to do so.\nRead the Files changed tab as if you were reviewing someone else’s work. Does the code count the intended column? Is the plot labeled? Does the generated PNG show the expected result? GitHub can display image changes in a pull request, so including the plot makes the output part of the review. The GitHub pull request documentation walks through creating and reviewing one.\nThis pause is useful even when you are the only contributor. It separates “I wrote this” from “I checked this,” and leaves a visible history of the decision. If you spot an issue, edit the script on the same branch, run it again, and commit and push the fix. The open pull request updates automatically."
+  },
+  {
+    "objectID": "tutorial.html#merge-update-and-try-it-yourself",
+    "href": "tutorial.html#merge-update-and-try-it-yourself",
+    "title": "Using Pull Requests When You Work Alone",
+    "section": "Merge, update, and try it yourself",
+    "text": "Merge, update, and try it yourself\nWhen the change looks good, click Merge pull request on GitHub and confirm the merge. Then update your local main branch and remove the local feature branch:\ngit switch main\ngit pull origin main\ngit branch -d add-cr-plot\nThe merge brings the reviewed change into main; pulling downloads that updated branch to your computer. Deleting the local branch is optional cleanup. GitHub may also offer to delete the remote branch after the merge.\nFor your next small analysis change, try the same sequence: create a branch, make one focused edit, inspect the result, open a pull request, and merge only after your review. You can use this workflow on a solo project or a class lab. The goal is not to add ceremony to every line of code; it is to make meaningful changes easier to check and easier to understand later."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
