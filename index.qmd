@@ -1,7 +1,12 @@
 ---
-title: "AndrewGivens.github.io"
+title: "Andrew Givens"
 ---
 
-This is a Quarto website.
+Welcome to my site. I’m a statistics student who enjoys using data to explore questions that interest me. Here are a few projects I’ve worked on, along with tutorials and notes from class.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Featured projects
+
+- [D&D Challenge Ratings](dnd-challenge-ratings.qmd): comparing challenge ratings across official and third-party monsters.
+- [NFL Combine](projects.qmd#nfl-combine): a project with **Andrew Walker**. Browse the [project site](https://andrewgivens.github.io/stat330-nfl-combine/) or [code repository](https://github.com/AndrewGivens/stat330-nfl-combine).
+
+See the [Projects page](projects.qmd) for details, or browse [all my GitHub repositories](https://github.com/AndrewGivens?tab=repositories).

@@ -1,14 +1,24 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - index.qmd
+    - about.qmd
+    - projects.qmd
+    - dnd-challenge-ratings.qmd
+    - tutorial.qmd
 
 website:
-  title: "AndrewGivens.github.io"
+  title: "Andrew Givens"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: projects.qmd
+        text: Projects
+      - href: dnd-challenge-ratings.qmd
+        text: D&D Blog Post
       - href: tutorial.qmd
         text: Tutorial
 

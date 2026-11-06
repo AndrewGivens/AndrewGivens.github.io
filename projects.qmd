@@ -1,0 +1,29 @@
+---
+title: "Projects"
+---
+
+Here are a few projects I have worked on. I’ll add more as I finish them.
+
+## Dungeons & Dragons Challenge Ratings
+
+Do third-party publishers assign challenge ratings consistently with official D&D monsters that have similar stats? This project uses monster data from the Open5e API to explore that question.
+
+- [Project code and README](https://github.com/AndrewGivens/dnd-challenge-rating-analysis)
+- [Blog post](dnd-challenge-ratings.qmd)
+
+## NFL Combine
+
+An exploration of NFL Combine data.
+
+**Contributors:** Andrew Givens and Andrew Walker.
+
+- [Project site](https://andrewgivens.github.io/stat330-nfl-combine/)
+- [Code repository](https://github.com/AndrewGivens/stat330-nfl-combine)
+
+## STAT 386 Pandas Foundations
+
+Course work and practice with Python and pandas.
+
+- [Repository](https://github.com/AndrewGivens/stat-386-pandas-foundations)
+
+For other repositories and experiments, see [my GitHub profile](https://github.com/AndrewGivens?tab=repositories).

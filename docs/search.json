@@ -49,6 +49,48 @@
     "text": "Merge, update, and try it yourself\nWhen the change looks good, click Merge pull request on GitHub and confirm the merge. Then update your local main branch and remove the local feature branch:\ngit switch main\ngit pull origin main\ngit branch -d add-cr-plot\nThe merge brings the reviewed change into main; pulling downloads that updated branch to your computer. Deleting the local branch is optional cleanup. GitHub may also offer to delete the remote branch after the merge.\nFor your next small analysis change, try the same sequence: create a branch, make one focused edit, inspect the result, open a pull request, and merge only after your review. You can use this workflow on a solo project or a class lab. The goal is not to add ceremony to every line of code; it is to make meaningful changes easier to check and easier to understand later."
   },
   {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Here are a few projects I have worked on. I’ll add more as I finish them."
+  },
+  {
+    "objectID": "projects.html#dungeons-dragons-challenge-ratings",
+    "href": "projects.html#dungeons-dragons-challenge-ratings",
+    "title": "Projects",
+    "section": "Dungeons & Dragons Challenge Ratings",
+    "text": "Dungeons & Dragons Challenge Ratings\nDo third-party publishers assign challenge ratings consistently with official D&D monsters that have similar stats? This project uses monster data from the Open5e API to explore that question.\n\nProject code and README\nBlog post"
+  },
+  {
+    "objectID": "projects.html#nfl-combine",
+    "href": "projects.html#nfl-combine",
+    "title": "Projects",
+    "section": "NFL Combine",
+    "text": "NFL Combine\nAn exploration of NFL Combine data.\nContributors: Andrew Givens and Andrew Walker.\n\nProject site\nCode repository"
+  },
+  {
+    "objectID": "projects.html#stat-386-pandas-foundations",
+    "href": "projects.html#stat-386-pandas-foundations",
+    "title": "Projects",
+    "section": "STAT 386 Pandas Foundations",
+    "text": "STAT 386 Pandas Foundations\nCourse work and practice with Python and pandas.\n\nRepository\n\nFor other repositories and experiments, see my GitHub profile."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Andrew Givens",
+    "section": "",
+    "text": "Welcome to my site. I’m a statistics student who enjoys using data to explore questions that interest me. Here are a few projects I’ve worked on, along with tutorials and notes from class."
+  },
+  {
+    "objectID": "index.html#featured-projects",
+    "href": "index.html#featured-projects",
+    "title": "Andrew Givens",
+    "section": "Featured projects",
+    "text": "Featured projects\n\nD&D Challenge Ratings: comparing challenge ratings across official and third-party monsters.\nNFL Combine: a project with Andrew Walker. Browse the project site or code repository.\n\nSee the Projects page for details, or browse all my GitHub repositories."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -56,10 +98,45 @@
     "text": "Hi, I’m Andrew"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "AndrewGivens.github.io",
+    "objectID": "dnd-challenge-ratings.html",
+    "href": "dnd-challenge-ratings.html",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Challenge rating (CR) helps DMs choose monsters, but one number has to cover hit points, armor, damage, spells, and special abilities. A mismatch can make an encounter unexpectedly easy or deadly, so I wanted to compare official monsters with a large third-party collection.\nMy question is: Do Kobold Press monsters have CRs similar to official monsters with comparable basic stats? I use the 2014 Wizards of the Coast (WotC) System Reference Document (SRD) as my baseline. The third-party records are all from Kobold Press, so these findings don’t represent every publisher. This is a first look, not a judgment about whether a monster is fun to run."
+  },
+  {
+    "objectID": "dnd-challenge-ratings.html#building-the-dataset",
+    "href": "dnd-challenge-ratings.html#building-the-dataset",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
+    "section": "Building the dataset",
+    "text": "Building the dataset\nI collected records from the Open5e API: the 2014 SRD, Creature Codex, and three Tome of Beasts books. My Python code uses the v2 /v2/creatures/ endpoint for monsters and /v2/documents/ for source and license details. The API returns paginated JSON; the script saves each page locally, waits one second between page requests, and writes selected fields to one CSV per source. Another script checks missing values, numeric ranges, duplicate IDs, and completeness.\nimport requests\n\nurl = \"https://api.open5e.com/v2/creatures/\"\nparams = {\"document__key\": \"srd-2014\", \"limit\": 100}\nresponse = requests.get(url, params=params, timeout=60)\nresponse.raise_for_status()\npage = response.json()\nThe response includes a next link. My script follows it to the last page and records row counts and source metadata in a manifest. Saving raw pages lets me revisit cleaning choices without repeating requests.\nThe 2026-11-06 pull has 1,852 monsters: 325 from the 2014 SRD and 1,527 from the four Kobold Press books. Each record has listed CR, hit points, armor class, six ability scores, source, publisher, and license metadata. Validation found no missing required values or duplicate IDs. The project repository has the scripts and run instructions."
+  },
+  {
+    "objectID": "dnd-challenge-ratings.html#ethics-and-access",
+    "href": "dnd-challenge-ratings.html#ethics-and-access",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
+    "section": "Ethics and access",
+    "text": "Ethics and access\nBefore collecting, I reviewed Open5e’s site robots.txt, the API host robots.txt, the legal page, and the Creature Codex and Tome of Beasts source pages. The robots files don’t explicitly allow or disallow API access; I didn’t treat them as permission. I used the documented API, paused one second between pages, and cached responses. Because sources have separate license and attribution terms, I’m keeping the downloaded records local and sharing code and summary figures. Anyone reusing the data should check their source’s terms."
+  },
+  {
+    "objectID": "dnd-challenge-ratings.html#what-i-found",
+    "href": "dnd-challenge-ratings.html#what-i-found",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
+    "section": "What I found",
+    "text": "What I found\nThe collections have different CR distributions. Median listed CR is 2 for the SRD and 5 for Kobold Press. Median hit points are 45 and 93; median armor class is 13 and 15. That shows the collections contain different mixes of monsters, so the raw medians alone do not answer whether similar monsters receive similar CRs.\n\n\n\nChallenge rating mix across the SRD and Kobold Press collections\n\n\nEach bar is scaled to 100%, making the CR mix comparable despite the different collection sizes. In both groups, higher CR tends to go with more hit points: the Spearman rank correlation is 0.97 for the SRD and 0.93 for Kobold Press. The relationship between CR and armor class is weaker, at 0.69 and 0.70.\n\n\n\nHit points and armor class by listed challenge rating\n\n\nCR uses log spacing on the x-axis so fractional ratings near zero and high ratings up to 30 can fit in the same plot. The hit-point axis is logarithmic too. Armor-class values overlap, so I added a tiny vertical jitter to make points visible; it changes the display only, not the values used in the analysis.\nFor a more direct comparison, I fit a linear regression using only 2014 SRD monsters. It predicts log(1 + CR) from log(1 + hit points), armor class, and the six ability scores. Five-fold cross-validation on the official records gave an R-squared of 0.90 on the log-CR scale and a mean absolute error of about 1.15 CR after converting predictions back to the CR scale. I then used a model fit on all SRD records to predict CR for Kobold Press monsters.\nWhat stood out to me is that, across Kobold Press, the median difference between listed and predicted CR is about −0.01, essentially zero. By book, the median difference is 0.03 for Creature Codex, −0.12 for Tome of Beasts, 0.25 for Tome of Beasts 2, and −0.19 for Tome of Beasts 3. A positive difference means the listed CR is higher than the model predicts from the stats included here. Official monsters use out-of-fold predictions, so each is predicted by a model that did not train on that record.\n\n\n\nListed CR minus the SRD model prediction, by source book\n\n\nThe boxes show each source’s median and middle half of residuals. I hid the separate outlier markers to make the central pattern easier to compare; the residual review table still includes every monster for closer inspection."
+  },
+  {
+    "objectID": "dnd-challenge-ratings.html#what-this-comparison-cant-tell-us",
+    "href": "dnd-challenge-ratings.html#what-this-comparison-cant-tell-us",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
+    "section": "What this comparison can’t tell us",
+    "text": "What this comparison can’t tell us\nThe official 2014 Dungeon Master’s Guide monster-building procedure uses more than my model does. It estimates defensive CR from effective hit points and AC, and offensive CR from expected damage per round and attack bonus or save DC, with adjustments for traits that change those stats. Ability scores aren’t separate inputs in that table, but can affect hit points, attacks, damage, and save DCs.\nMy model doesn’t reproduce the DMG procedure: it predicts CR from listed HP (log-transformed), AC, and six ability scores, leaving out damage and special traits. Its residuals mean “different from this simple statistical baseline,” not “rated incorrectly.” Without playtest or encounter-outcome data, I can’t tell whether CR predicts how difficult a fight feels in actual play. The official rules define CR relative to an appropriately equipped, well-rested party of four (2014 Basic Rules). The 2014 SRD is one baseline, and Open5e may not include every monster from either company.\nI considered estimating damage per round from action descriptions, but fields were inconsistent. A text screen flagged 2,561 attack-like actions; 147 lacked structured attack data. These are heuristic counts, not verified attacks, and some may not deal damage. Saving-throw damage is often written in prose too. I left damage out rather than trust an incomplete parser. A next step would be to hand-check a parser, then compare more features within similar CR ranges."
+  },
+  {
+    "objectID": "dnd-challenge-ratings.html#reproducing-the-project",
+    "href": "dnd-challenge-ratings.html#reproducing-the-project",
+    "title": "Are Kobold Press D&D monsters rated like official ones?",
+    "section": "Reproducing the project",
+    "text": "Reproducing the project\nThe repository README has commands for acquiring the pages, validating the data, reviewing attack-field coverage, and generating the analysis. If you try a similar project, start with the Open5e API documentation, check the terms for your selected sources, save the raw responses, and inspect missing values and duplicates before drawing conclusions."
   }
 ]
